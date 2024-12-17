@@ -14,6 +14,16 @@ try {
 
     bot.on(message("text"), (ctx) => ctx.reply("I dont understand humans!!!"));
 
+    bot.on("text", (ctx) => {
+        console.log(ctx.update.message);
+        if(ctx.update.message.text == "I love you"){
+            ctx.reply("Love you too bro");
+        }
+        else{
+            ctx.reply("Nahi samja bhai")
+        }
+    })
+
     bot.launch();
 }
 catch {
