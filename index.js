@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const { Telegraf } = require('telegraf');
 const { message } = require('telegraf/filters');
 require('dotenv').config()
@@ -13,6 +14,12 @@ try {
     bot.on(message('sticker'), (ctx) => ctx.reply('👍')) // sticker
 
     bot.on(message("text"), (ctx) => ctx.reply("I dont understand humans!!!"));
+
+    bot.command("giveMeAdvice", async (ctx) => {
+        const res = await fetch("https://api.adviceslip.com/advice");
+        const data = await res.json();
+        ctx.reply(data.slip.advice);
+    })
 
     bot.on("text", (ctx) => {
         console.log(ctx.update.message);
